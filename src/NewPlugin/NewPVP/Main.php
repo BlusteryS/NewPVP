@@ -17,6 +17,7 @@ class Main extends PluginBase {
 		$this->config = (new Config($this->getDataFolder() . "config.yml", Config::YAML, [
 			"time" => 15,
 			"messages" => [
+                "end" => "§f(§cРежим PvP§f) Вы больше не в режиме PVP.",
 				"commands" => "§f(§cРежим PvP§f) Вы не можете писать команды в режиме §cPvP§f. Осталось: §c%0 сек.",
 				"kill" => "§f(§cРежим PvP§f) Игрок §c%0§f вышел в режиме §cPvP§f и был убит.",
 				"wait" => "§f(§cРежим PvP§f) Вы вышли из режима §сPvP§f.",

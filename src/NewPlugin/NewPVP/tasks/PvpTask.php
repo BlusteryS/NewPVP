@@ -23,7 +23,7 @@ class PvpTask extends Task {
 			if ($content["time"] < time()) {
 				unset($plugin->pvp[$name]);
 				$bar->removeAllPlayers();
-				$plugin->getServer()->getPlayerExact($name)?->sendMessage($plugin->config["messages"]);
+				$plugin->getServer()->getPlayerExact($name)?->sendMessage($plugin->config["messages"]["end"]);
 			}
 		}
 	}
