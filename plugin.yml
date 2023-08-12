@@ -1,6 +1,6 @@
 name: NewPVP
 main: NewPlugin\NewPVP\Main
-version: 0.0.1
+version: 1.0.0
 api: 5.0.0
 author: BlusterySasha
 website: vk.com/blusterysasha
