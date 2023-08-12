@@ -138,14 +138,17 @@ class BossBar {
 		} else {
 			$pk = new RemoveActorPacket();
 			$pk->actorUniqueId = $this->actorId;
-			Server::getInstance()->broadcastPackets($this->getPlayers(), [$pk]);
+			foreach ($this->getPlayers() as $player) {
+				/** @var Player $player */
+				$player->getNetworkSession()->sendDataPacket($pk);
+			}
 		}
 		if ($entity instanceof Entity) {
 			$this->actorId = $entity->getId();
 			$this->attributeMap = $entity->getAttributeMap();
 			$this->getAttributeMap()->add($entity->getAttributeMap()->get(Attribute::HEALTH));
 			$this->propertyManager = $entity->getNetworkProperties();
-			if (!($entity instanceof Player)) $entity->despawnFromAll();
+			if (!$entity instanceof Player) $entity->despawnFromAll();
 		} else {
 			$this->actorId = Entity::nextRuntimeId();
 		}
@@ -198,7 +201,10 @@ class BossBar {
 		$pk = new UpdateAttributesPacket();
 		$pk->actorRuntimeId = $this->actorId;
 		$pk->entries = $this->getAttributeMap()->needSend();
-		Server::getInstance()->broadcastPackets($players, [$pk]);
+		foreach ($players as $player) {
+			/** @var Player $player */
+			$player->getNetworkSession()->sendDataPacket($pk);
+		}
 	}
 
 	protected function sendBossHealthPacket(array $players) : void {
