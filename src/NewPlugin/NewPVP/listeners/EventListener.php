@@ -29,8 +29,9 @@ class EventListener implements Listener {
 		$player = $event->getPlayer();
 		if (isset($this->plugin->pvp[$name = $player->getName()])) {
 			$player->kill();
+			$msg = Utils::format($this->plugin->config["messages"]["kill"], $p->getDisplayName());
 			foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
-				$p->sendMessage(Utils::format($this->plugin->config["messages"]["kill"], $p->getDisplayName()));
+				$p->sendMessage($msg);
 			}
 			unset($this->plugin->pvp[$name]);
 		}
